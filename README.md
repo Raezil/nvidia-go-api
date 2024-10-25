@@ -8,5 +8,4 @@ go to ~/.bashrc and add
 ```export NVIDIA_API=token```
 
 - features:
-  - tree of thought
   - nvidia API
