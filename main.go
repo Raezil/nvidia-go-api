@@ -13,7 +13,7 @@ func (nvidia *NVIDIA) Run(prompt string) (string, error) {
 	cmd := exec.Command("python3", "nvidia.py", prompt, nvidia.model)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("error: %v, output: %s", err, string(output))
 	}
 	return string(output), nil
 }
@@ -24,7 +24,8 @@ func main() {
 	}
 	output, err := nvidia.Run("Teach me gorilla websockets")
 	if err != nil {
-		panic(err)
+		fmt.Println("Execution failed:", err)
+		return
 	}
 	fmt.Println(string(output))
 }
