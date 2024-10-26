@@ -14,12 +14,15 @@ class NVIDIAService:
     def run(self, prompt):
         return ''.join(chunk.content for chunk in self.client.stream([{"role": "user", "content": prompt}]))
 
-if __name__ == "__main__":
+
+def main():
     if len(sys.argv) < 3:
         print("Usage: python nvidia.py <prompt> <model>")
         sys.exit(1)
     prompt = sys.argv[1]
     model = sys.argv[2]
     nvidia = NVIDIAService(api_key=os.environ['NVIDIA_API'], model=model)
-    final_answer = nvidia.tree_of_thoughts(prompt)
     print(nvidia.run(prompt))
+
+if __name__ == "__main__":
+    main()
